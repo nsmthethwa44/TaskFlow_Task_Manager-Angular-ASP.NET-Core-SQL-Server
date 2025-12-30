@@ -173,4 +173,4 @@ C:\Users\user\Desktop\Programming\Web Design\Angular\Web Apps\Task Manager\backe
 C:\Users\user\Desktop\Programming\Web Design\Angular\Web Apps\Task Manager\backend\TaskFlow\obj\Debug\net8.0\TaskFlow.pdb
 C:\Users\user\Desktop\Programming\Web Design\Angular\Web Apps\Task Manager\backend\TaskFlow\obj\Debug\net8.0\TaskFlow.genruntimeconfig.cache
 C:\Users\user\Desktop\Programming\Web Design\Angular\Web Apps\Task Manager\backend\TaskFlow\obj\Debug\net8.0\ref\TaskFlow.dll
-C:\Users\user\Desktop\Programming\Web Design\Angular\Web Apps\Task Manager\backend\TaskFlow\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\user\Desktop\Programming\Web Design\Angular\Web Apps\Task Manager\backend\TaskFlow\obj\Debug\net8.0\TaskFlow.sourcelink.json

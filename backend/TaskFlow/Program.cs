@@ -18,9 +18,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//connection string
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
-//builder.Services.AddDbContext<AppDbContext>(options => options.UseN(builder.Configuration.GetConnectionString("DbConnection")));
+// local connection string
+//builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+
+// server db connection string
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
 
 // register repositoty
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -50,7 +52,7 @@ builder.Services.AddCors(options =>
         policy.AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials()
-              .WithOrigins("http://localhost:4200", "https://estateflowsystem-gvaveyhdduhhezhx.canadacentral-01.azurewebsites.net"));
+              .WithOrigins("http://localhost:4200", "https://taskflowsystem.netlify.app"));
 });
 
 var app = builder.Build();
