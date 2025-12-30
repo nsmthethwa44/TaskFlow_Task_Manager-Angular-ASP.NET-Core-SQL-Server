@@ -1,0 +1,42 @@
+<!-- login form  -->
+ <div class="login-register-container" *ngIf="isVisible">
+     <form [formGroup]="registerForm" class="form" (submit)="onSubmit()">
+
+        <div class="close" (click)="closeRegisterForm()"><i class="fa-solid fa-xmark"></i></div>
+        <div class="title">
+           <h2>Sign Up</h2> 
+        </div>
+
+        <div class="inputs">
+            <label for="name">Name:
+                <input type="text" class="textBox" placeholder="Your Name" formControlName="name">
+                <span class="error" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">Name is required</span>
+            </label>
+            <label for="email">Email:
+                <input type="email" class="textBox" placeholder="Your Email" formControlName="email">
+                <span class="error" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">Email is required</span>
+
+            </label>
+            <label for="password">Password:
+                <input type="password" class="textBox" placeholder="password" formControlName="password">
+                <span class="error" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">Password is required (min 5)</span>
+            </label>
+            <label for="file">Upload Photo:
+                <input type="file" (change)="onFileSelected($event)" class="textBox" />
+            </label>
+
+            <div class="remember flex">
+                <span><input type="checkbox" name="" id="">I accept our T&Cs Lorem ipsum dolor.</span>
+            </div>
+
+             <div class="buttons">
+            <button type="submit" class="btn">Sign In<i class="fa-solid fa-right-to-bracket"></i></button>
+        </div>
+
+        <div class="sign">
+            <p>Already have account? <a href="#" (click)="onClickLogin()">Sign In</a></p>
+        </div>
+        </div>
+       
+    </form>
+ </div>

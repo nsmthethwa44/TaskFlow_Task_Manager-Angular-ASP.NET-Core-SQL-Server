@@ -1,0 +1,72 @@
+<div class="tasks-content">
+    <!-- intro  -->
+ <div class="intro flex">
+    <div class="text">
+        <h3>Task Management</h3>
+        <p>Create your task and lorem your day.</p>
+    </div>
+
+    <div class="buttons"><button class="btn" (click)="openCreate()"><i class="fa-solid fa-plus"></i>Add Task</button></div>
+ </div>
+
+ <!-- task list  -->
+ <div class="task-container">
+      <div class="title flex">
+        <h3>Recent Tasks</h3>
+        <!-- <a class="view-all">View All</a> -->
+      </div>
+      <div class="toolbar">
+        <div class="search"><input type="text" class="search-text" placeholder="Search..."></div>
+
+        <div class="filter">
+          <div class="refresh" (click)="refreshTasks()"><i class="fa-solid fa-arrows-rotate"></i></div>
+          <select *ngIf="selectedCategory" (change)="filterByCategory()">
+            <option value="all">All</option>
+            <option value="1">Work</option>
+            <option value="2">Personal</option>
+            <option value="3">Urgent</option>
+            <option value="4">Other</option>
+          </select>
+        </div>
+    </div>
+       <div class="task-list">
+      @if (tasks.length === 0) {
+        <p>You have no tasks</p>
+      }@else {
+    <div class="box card" *ngFor="let task of tasks.slice(0, 28)" [style.border-left]="'6px solid ' + categoryColors[task.category]">
+
+        <div class="heading">
+          <h3 [class.completed]="task.isCompleted">{{ task.title }}</h3>
+          <div class="controls">
+              <button class="delete" (click)="deleteTask(task.id)"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        </div>
+
+          <p>{{ task.description }}</p>
+
+          <div class="meta">
+            <span class="category" [style.color]="categoryColors[task.category]">{{ task.category }}</span>
+            <span>Due: {{ task.dueDate | date }}</span>
+              <div class="buttons">
+              <button class="checkbox-btn" (click)="toggleComplete(task)">
+                @if (task.isCompleted) {
+                  <i class="fa-solid fa-check-square done"></i>
+                } @else {
+                  <i class="fa-regular fa-square"></i>
+                }
+              </button>
+            </div>
+          </div>
+
+      </div>
+      }
+    </div>
+</div>
+</div>
+
+
+
+
+
+<!-- create task modal form  -->
+<app-task-create-modal  (onClose)="closeCreate()" [isVisible]="showCreateModal" (taskSuccess)="refreshTasks()"></app-task-create-modal>

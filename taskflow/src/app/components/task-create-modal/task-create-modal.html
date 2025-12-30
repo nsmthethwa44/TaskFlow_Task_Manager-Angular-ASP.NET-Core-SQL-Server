@@ -1,0 +1,31 @@
+
+<div class="create-task-modal" *ngIf="isVisible">
+    
+  <form [formGroup]="form" class="form">
+    <div class="title">
+        <h2>Create Task</h2>
+        <div class="close" (click)="onClose()"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+
+    <div class="inputs">
+  <label>Title: <input formControlName="title" type="text" class="textBox" placeholder="Title" /></label>
+    <label>Description: <textarea formControlName="description" class="textBox" placeholder="Short task description..."></textarea></label>
+    <label>Due Date: <input formControlName="dueDate" type="date"class="textBox" /></label>
+    <label>Category:
+        <select formControlName="category" class="textBox">
+            <option value="" disabled>--Select Category--</option>
+            <option value="Work">Work</option>
+            <option value="Personal">Personal</option>
+            <option value="Urgent">Urgent</option>
+            <option value="Other">Other</option>
+        </select>
+    </label>
+
+    <div class="buttons">
+        <button type="button" (click)="submit()" class="btn"><i class="fa-solid fa-plus"></i>Create Task</button>
+    </div>
+    </div>
+  
+  </form>
+
+</div>

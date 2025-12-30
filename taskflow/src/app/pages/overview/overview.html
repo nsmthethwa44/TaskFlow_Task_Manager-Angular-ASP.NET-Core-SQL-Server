@@ -1,0 +1,147 @@
+<div class="overview-content">
+<!-- intro  -->
+  <div class="intro flex">
+      <div class="text">
+          <h3>Welcome 👋, Let's get started.</h3>
+          <p>Create your task and lorem your day.</p>
+      </div>
+
+      <div class="buttons"><button class="btn"><i class="fa-solid fa-file-export"></i>Export</button></div>
+  </div>
+
+  <!-- stats  -->
+  <div class="stats">
+        <div class="box">
+          <div class="icon"><i class="fa-solid fa-list"></i></div>
+        <div class="text">
+            <h3>Total Tasks</h3>
+          <h2>{{ stats?.total || 0}}</h2>
+        </div>
+        </div>
+        <div class="box">
+          <div class="icon"><i class="fa-solid fa-check"></i></div>
+        <div class="text">
+          <h3>Completed Tasks</h3>
+          <h2>{{ stats?.completed || 0}}</h2>
+        </div>
+        </div>
+          <div class="box">
+              <div class="icon"><i class="fa-solid fa-hourglass-half"></i></div>
+        <div class="text">
+          <h3>Pending Tasks</h3>
+          <h2>{{ stats?.pending || 0}}</h2>
+        </div>
+        </div>
+        <div class="box">
+          <div class="icon"><i class="fa-solid fa-clipboard-list"></i></div>
+        <div class="text">
+          <h3>Categories</h3>
+          <h2>3</h2>
+        </div>
+        </div>
+      </div>
+
+      <!-- stats overview chart  -->
+      <div class="charts-container">
+          <div class="box card">
+              <h3>Task Completion Overview</h3>
+              <div class="chart-box" *ngIf="tasks.length > 0">
+              <ngx-charts-bar-horizontal
+                [view]="view"
+                [results]="taskOverviewStats"
+                [scheme]="colorScheme"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="true"
+                [showDataLabel]="true"
+                [gradient]="false"
+                [animations]="true">
+              </ngx-charts-bar-horizontal>
+              </div>
+                <p *ngIf="!tasks || tasks.length === 0">
+                  You have no task yet. Create tasks to see your completion stats.</p>
+          </div>
+          <div class="box card">
+              <h3>Task By Category</h3>
+              <div class="chart-box" *ngIf="categoryStats.length > 0">
+                <ngx-charts-bar-vertical
+                    [view]="view"
+                    [results]="categoryStats"
+                    [scheme]="colorScheme"
+                    [gradient]="false"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    [legend]="true"
+                    [showDataLabel]="true"
+                    [animations]="true">
+                  </ngx-charts-bar-vertical>
+              </div>
+              <p *ngIf="!categoryStats || categoryStats.length === 0">No category stats overview yet</p>
+          </div>
+      </div>
+
+  <!-- auth container  -->
+  <div class="auth-container">
+      <app-login  [isVisible]="isLoginVisible" (switchToRegister)="showRegister()"></app-login>
+      <app-register [isVisible]="isRegisterVisible" (switchToLogin)="showLogin()" (registered)="registrationSuccess()"></app-register>
+  </div>
+
+<!-- task list  -->
+ <div class="task-container">
+      <div class="title flex">
+        <h3>Recent Tasks</h3>
+        <a class="view-all">View All</a>
+      </div>
+      <div class="toolbar">
+        <div class="search"><input type="text" class="search-text" placeholder="Search..."></div>
+
+        <div class="filter">
+          <div class="refresh" (click)="refreshTasks()"><i class="fa-solid fa-arrows-rotate"></i></div>
+          <select *ngIf="selectedCategory" (change)="filterByCategory()">
+            <option value="all">All</option>
+            <option value="1">Work</option>
+            <option value="2">Personal</option>
+            <option value="3">Urgent</option>
+            <option value="4">Other</option>
+          </select>
+        </div>
+    </div>
+
+      <div class="task-list">
+        @if (tasks.length === 0) {
+          <p>You have no tasks</p>
+        }@else {
+      <div class="box card" *ngFor="let task of tasks.slice(0, 8)" [style.border-left]="'6px solid ' + categoryColors[task.category]">
+
+          <div class="heading">
+            <h3 [class.completed]="task.isCompleted">{{ task.title }}</h3>
+            <div class="controls">
+                <button class="delete" (click)="deleteTask(task.id)"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+          </div>
+
+            <p>{{ task.description }}</p>
+
+            <div class="meta">
+              <span class="category" [style.color]="categoryColors[task.category]">{{ task.category }}</span>
+              <span>Due: {{ task.dueDate | date }}</span>
+                <div class="buttons">
+                <button class="checkbox-btn" (click)="toggleComplete(task)">
+                  @if (task.isCompleted) {
+                    <i class="fa-solid fa-check-square done"></i>
+                  } @else {
+                    <i class="fa-regular fa-square"></i>
+                  }
+                </button>
+              </div>
+            </div>
+
+        </div>
+        }
+      </div>
+</div>
+</div>
+
+<!-- create task modal form  -->
+<app-task-create-modal  (onClose)="closeCreate()" [isVisible]="showCreateModal" (taskSuccess)="refreshTasks()"></app-task-create-modal>
+

@@ -1,0 +1,48 @@
+<div class="sidebar">
+    <div class="close-box" (click)="closeSidebar()"><i class="fa-solid fa-xmark"></i></div>
+    <div class="content">
+
+        <div class="logo">
+            <h2> <i class="fa-solid fa-chart-line"></i> TaskFlow</h2>
+        </div>
+
+        <div class="navbar">
+            <ul class="nav">
+                <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><i class="fa-solid fa-layer-group"></i>Dashboard</a></li>
+                <li><a routerLink="/tasks" routerLinkActive="active"><i class="fa-solid fa-list"></i>Tasks</a></li>
+                <li><a href="#"><i class="fa-solid fa-file"></i>Categories</a></li>
+                <li><a href="#"><i class="fa-solid fa-circle-question"></i>Help</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i>Settings</a></li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <ul class="nav">
+                @if (loggedInUser) {
+                     <li><a href="" (click)="logOut()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a></li>
+                }@else {
+                      <li><a href=""><i class="fa-solid fa-right-from-bracket"></i> Sign In</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="user">
+        <div class="text-img">
+            <div class="box-img-text" *ngIf="loggedInUser | async as user;">
+                <div class="box-img"><img [src]="`${getImageUrl(user?.imageUrl)}`" alt="" class="img-box"></div>
+                <div class="text">
+                    <h3>{{user?.name || "Admin"}}</h3>
+                    <p>Manager</p>
+                </div>
+            </div>
+           <span>Free</span> 
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="copyright">
+            <h6>Created By: <span>Nkululeko Mthethwa</span><img src="" alt="">| &copy;2025 | All Right Reserved.</h6>
+        </div>
+    </div>
+</div>
