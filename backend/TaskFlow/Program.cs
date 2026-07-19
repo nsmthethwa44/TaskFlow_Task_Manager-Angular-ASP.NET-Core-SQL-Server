@@ -67,7 +67,7 @@ builder.Services.AddCors(options =>
         policy.AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials()
-              .WithOrigins("http://localhost:4200", "https://taskflowsystem.netlify.app"));
+              .WithOrigins("https://taskflowsystem.netlify.app", "http://localhost:4200"));
 });
 
 var app = builder.Build();
@@ -91,12 +91,9 @@ if (app.Environment.IsDevelopment())
 // user CORS
 app.UseRouting();
 app.UseCors("AllowFrontend");
-
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
