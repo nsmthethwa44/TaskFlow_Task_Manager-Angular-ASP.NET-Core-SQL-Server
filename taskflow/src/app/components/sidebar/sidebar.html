@@ -8,11 +8,11 @@
 
         <div class="navbar">
             <ul class="nav">
-                <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><i class="fa-solid fa-layer-group"></i>Dashboard</a></li>
-                <li><a routerLink="/tasks" routerLinkActive="active"><i class="fa-solid fa-list"></i>Tasks</a></li>
-                <li><a href="#"><i class="fa-solid fa-file"></i>Categories</a></li>
-                <li><a href="#"><i class="fa-solid fa-circle-question"></i>Help</a></li>
-                <li><a href="#"><i class="fa-solid fa-gear"></i>Settings</a></li>
+                <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeSidebar()"><i class="fa-solid fa-layer-group"></i>Dashboard</a></li>
+                <li><a routerLink="/tasks" routerLinkActive="active" (click)="closeSidebar()"><i class="fa-solid fa-list"></i>Tasks</a></li>
+                <li><a href="#" (click)="closeSidebar()"><i class="fa-solid fa-file"></i>Categories</a></li>
+                <li><a href="#" (click)="closeSidebar()"><i class="fa-solid fa-circle-question"></i>Help</a></li>
+                <li><a href="#" (click)="closeSidebar()"><i class="fa-solid fa-gear"></i>Settings</a></li>
             </ul>
 
             <div class="divider"></div>
